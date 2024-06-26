@@ -1,4 +1,12 @@
 # Autonomous quadrotor
+<p align="center">
+  <img src="https://github.com/AlexKoldy/autonomous_quadrotor/assets/52255127/b24c9c50-8568-4496-8354-f5cc870fd3e4" />
+</p>
+
+![image](https://github.com/AlexKoldy/autonomous_quadrotor/assets/52255127/7176d963-838a-43c3-9cfa-6f451faeb113)
+
+
+
 ## Planning
 ### Bidirectional A*
 We use A* Search, a hallmark graph algorithm in robotics, which builds upon Dijkstra's Algorithm by expanding nodes prioritized by the sum of their "cost-to-come" ($g(v): V \rightarrow \mathbb{R}$) and an estimated "cost-to-go" ($h(v): V \rightarrow \mathbb{R}$), $f(v) = g(v) + h(v)$. We take as input a graph $G(V, E)$, a source node $v\_s \in V$, and a sink node $v\_g \in V$. 
@@ -32,6 +40,10 @@ $\quad \quad$ where $\times$ denotes the cross product and $\| \cdot \|$ denotes
 4. **Recursive Subdivision**: Find the point $p\_k$ with the maximum distance $d\_k$ from the line segment $p\_1p\_n$. If $d\_k$ is greater than a predefined threshold $\epsilon$, the algorithm keeps $p\_k$ and recursively applies the same process to the segments $p\_1p\_k$ and $p\_kp\_n$. If $d\_k \leq \epsilon$, all points between $p\_1$ and $p\_n$ are discarded.
 
 5. **Constructing the Simplified Path**: The process is repeated recursively for each sub-segment until all points are processed. The remaining points form the simplified path.
+
+<p align="center">
+  <img src="https://github.com/AlexKoldy/autonomous_quadrotor/assets/52255127/1d4a58c6-b6a2-4bb0-85b2-17c92b0a7745" />
+</p>
 
 ### Minimum-Snap Trajectory Generation
 To generate minimum-snap trajectories, we use a $7\text{th}$ order polynomial to represent the position (in one dimension) of the quadrotor:
@@ -163,6 +175,12 @@ $$
 
 where $\symbf{A}\_{corr}$ and $\symbf{b}\_{corr}$ are the matrices associated with additional corridor constraints.
 
+<p align="center">
+  <img src="https://github.com/AlexKoldy/autonomous_quadrotor/assets/52255127/8e60bd03-b854-449e-b1af-aea0268f555e" />
+</p>
+
+
+
 ## Control
 ### Nonlinear Geometric Control
 To control the robot's motion three-dimensional space, a nonlinear geometric controller is designed, with feedback coming in the form of position ($\textbf{r}$), velocity ($\dot{\textbf{r}}$), orientation $\left({}^WR\_B\right)$ and angular velocity ($\symbf\omega$). The desired force necessary to command the robot's movement in $\mathbb{R}^3$, $\textbf{F}\_{des}$, is given by the expression
@@ -262,6 +280,8 @@ $$
 with units of $s^{-2}$ and $s^{-1}$, respectively. 
 
 The gain matrix $K\_p$ provides a proportional constant on the position error of the robot in $\mathbb{R}^3$, which produces large accelerations with high error and less acceleration with low error. The gain matrix $K\_d$ provides a proportional constant on the velocity error of the robot $\mathbb{R}^3$, which produces a damping effect on the system's acceleration. This helps to minimize the overshoot the quadrotor experiences when following trajectories or flying towards a point.
+![image](https://github.com/AlexKoldy/autonomous_quadrotor/assets/52255127/2f2291d3-9dab-4661-804a-aa128e9b220c)
+
 
 ## Estimation
 ### Unscented Kalman Filter
@@ -381,4 +401,9 @@ Finally, the covariance is calculated as
 $$
 \Sigma\_{k+1|k+1} = \Sigma\_{k+1|k} - K\Sigma\_{yy}K^\top
 $$
+
+We compare the roll, pitch yaw values extracted from the quaternion information and compare against those of the Vicon system.
+
+![image](https://github.com/AlexKoldy/autonomous_quadrotor/assets/52255127/96c9134e-10d3-4680-9b7c-2ca2df898592)
+
 
