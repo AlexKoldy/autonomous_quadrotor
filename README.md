@@ -13,7 +13,7 @@ We use A* Search, a hallmark graph algorithm in robotics, which builds upon Dijk
 
 The "cost-to-come" term $g(v)$ defines the cost of following the optimal sub-path from $v\_s$ to $v \in V$. The "cost-to-go" term, also known as a heuristic $h(v)$, is an estimate of the cost to follow the optimal path from $v \in V$ to $v\_g$. We ensure that A* Search is optimal and complete by using a heuristic $h(v)$ that is both admissible and consistent. 
 
-We consider $h(v)$ admissible if $\forall v \in V$, $h(v) \leq c^*(v, v\_g)$, where $c^*(v)$ is the true cost of the optimal path from $v$ to $v\_g$. We consider $h(v)$ consistent if $\forall u, v \in V$ such that $e(u, v) \in E$, $h(u) \leq c(u, v) + h(v)$. 
+We consider $h(v)$ admissible if $\forall v \in V$, $h(v) \leq c^\star(v, v\_g)$, where $c^*(v)$ is the true cost of the optimal path from $v$ to $v\_g$. We consider $h(v)$ consistent if $\forall u, v \in V$ such that $e(u, v) \in E$, $h(u) \leq c(u, v) + h(v)$. 
 
 We choose $h$ as the Euclidean ($L\_2$) distance. Other candidates include the Manhattan ($L\_1$) distance and Diagonal or Chebyshev ($L\_{\infty}$) distance. 
 
